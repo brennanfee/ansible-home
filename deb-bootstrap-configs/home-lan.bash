@@ -4,3 +4,6 @@
 #
 # This script is intended to be used with the [Linux-Bootstraps](https://github.com/brennanfee/linux-bootstraps) deb-bootstrapper.bash script.  See the documentation there for usage.
 #
+# Short URL: https://tinyurl.com/brennan-home-lan-config
+# Github URL: https://raw.githubusercontent.com/brennanfee/ansible-home/refs/heads/main/deb-bootstrap-configs/home-lan.bash
+#
