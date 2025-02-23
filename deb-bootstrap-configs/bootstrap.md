@@ -27,10 +27,6 @@ If you need to run the dev branch version use this instead:
 
 `curl -fsSL -o bootstrapper.bash https://tinyurl.com/dev-deb-bootstrapper`
 
-After downloading the script, mark it executable:
-
-`chmod +x bootstrapper.bash`
-
 ## Run The Script
 
 Script usage: bootstrapper.bash {distro} {edition} (configuration) (flags/options)
@@ -51,18 +47,23 @@ or options should be required (other then hostname as described above).
 
 For "normal" machines:
 
-- Home LAN Machine -> `sudo ./bootstrapper.bash debian backports homelan --hostname <hostname> -a`
-- Home LAN Virtual Machine -> `sudo ./bootstrapper.bash debian backports vmhomelan`
+- Home LAN Machine -> `sudo bash bootstrapper.bash debian backports homelan --hostname <hostname> -a`
+- Home LAN Virtual Machine -> `sudo bash bootstrapper.bash debian backports vmhomelan`
 
 For my lab environment:
 
-- Home LAB Machine -> `sudo ./bootstrapper.bash debian backports homelab`
-- Home LAB Virtual Machine -> `sudo ./bootstrapper.bash debian backports vmhomelab`
+- Home LAB Machine -> `sudo bash bootstrapper.bash debian backports homelab`
+- Home LAB Virtual Machine -> `sudo bash bootstrapper.bash debian backports vmhomelab`
 
 ## TLDR
 
 ``` bash
 curl -fsSL -o bootstrapper.bash https://tinyurl.com/deb-bootstrapper
-chmod +x bootstrapper.bash
-sudo ./bootstrapper.bash debian backports homelan --hostname <hostname> -a
+sudo bash bootstrapper.bash debian backports homelan --hostname <hostname> -a
+```
+
+Or as a one-liner:
+
+``` bash
+sudo bash <(curl -fsSL https://tinyurl.com/deb-bootstrapper)
 ```
