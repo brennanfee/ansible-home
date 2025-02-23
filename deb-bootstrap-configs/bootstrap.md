@@ -8,15 +8,16 @@ Use Ventoy hard drive to boot into Debian command line.
 
 Check if you have network access, `ping www.google.com`.
 
-If you do not have access, attempt to set up drivers for wired or wireless. If things won't auto connect the following commands may be used to manually create an IP and connect.
+If you do not have access, attempt to set up drivers for wired or wireless.  If
+things won't auto connect the following commands may be used to manually create
+an IP and connect.
 
-`ip addr add 10.0.0.250/16 brd + dev <device name, like enp3s0 or whatever>`
-
-`ip link set <device name> up`
-
-`ip route add default via 10.0.0.1`
-
-`vi /etc/resolv.conf`, edit and add `nameserver 10.0.0.1`
+``` bash
+ip addr add 10.0.0.250/16 brd + dev <device name, like enp3s0 or whatever>
+ip link set <device name> up
+ip route add default via 10.0.0.1
+vi /etc/resolv.conf`, edit and add `nameserver 10.0.0.1
+```
 
 ## Download bootstrap script
 
@@ -26,30 +27,42 @@ If you need to run the dev branch version use this instead:
 
 `curl -fsSL -o bootstrapper.bash https://tinyurl.com/dev-deb-bootstrapper`
 
+After downloading the script, mark it executable:
+
+`chmod +x bootstrapper.bash`
+
 ## Run The Script
-
-### Set Pre-Environment Variables
-
-While any number of environment variables may be passed, generally the only one needed is the
-machine name.
-
-`export AUTO_HOSTNAME=<hostname>`
-
-### Script Usage
 
 Script usage: bootstrapper.bash {distro} {edition} (configuration) (flags/options)
 
-#### Examples
+If no specific configuration is desired, simply pass `default` as the configuration.
+Any options passed will then override the default settings.
 
-Usually one of my pre-setup configurations should be used. With these no other flags or
-options should be required (other then hostname as described above).
+The most common option to pass is `--hostname` with the name for the machine being
+installed.  If no host name is passed, one will be auto-generated.
+
+For a fully automated installation (no confirmations, no prompts) you can pass
+`-a` as a flag.  This option will also automatically reboot at the end of installation.
+
+### Examples
+
+Usually one of my pre-setup configurations should be used.  With these no other flags
+or options should be required (other then hostname as described above).
 
 For "normal" machines:
 
-- Home LAN Machine -> `bootstrapper.bash debian backports homelan --auto`
-- Home LAN Virtual Machine -> `bootstrapper.bash debian backports vmhomelan --auto`
+- Home LAN Machine -> `sudo ./bootstrapper.bash debian backports homelan --hostname <hostname> -a`
+- Home LAN Virtual Machine -> `sudo ./bootstrapper.bash debian backports vmhomelan`
 
 For my lab environment:
 
-- Home LAB Machine -> `bootstrapper.bash debian backports homelab --auto`
-- HOME LAB Virtual Machine -> `bootstrapper.bash debian backports vmhomelab --auto`
+- Home LAB Machine -> `sudo ./bootstrapper.bash debian backports homelab`
+- Home LAB Virtual Machine -> `sudo ./bootstrapper.bash debian backports vmhomelab`
+
+## TLDR
+
+``` bash
+curl -fsSL -o bootstrapper.bash https://tinyurl.com/deb-bootstrapper
+chmod +x bootstrapper.bash
+sudo ./bootstrapper.bash debian backports homelan --hostname <hostname> -a
+```
